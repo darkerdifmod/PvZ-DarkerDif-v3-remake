@@ -7686,11 +7686,11 @@ void Zombie::DropHelm(unsigned int theDamageFlags)
 	{
 		if (mPhaseCounter == 0)
 		{
-    		for (int i = 0; i < 100; i++)
+    		for (int i = 0; i < 50; i++)
     		{
         		Projectile* aProjectile2 = mBoard->AddProjectile(aPosX, aPosY, mRenderOrder, mRow, ProjectileType::PROJECTILE_ZOMBIE_PEA);
         		aProjectile2->mMotionType = ProjectileMotion::MOTION_STAR;
-        		aProjectile2->mVelX = -2.0;
+        		aProjectile2->mVelX = -1.0;
     		}
 		}
 		GetTrackPosition("anim_cone", aPosX, aPosY);
