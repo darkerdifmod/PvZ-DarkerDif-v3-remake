@@ -667,7 +667,7 @@ void Board::PickZombieWaves()
 		}
 
 		// Certain levels multiply the zombie points
-		aZombiePoints *= 8;
+		aZombiePoints *= 4;
 		if (mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_COLUMN)
 		{
 			aZombiePoints *= 6;
