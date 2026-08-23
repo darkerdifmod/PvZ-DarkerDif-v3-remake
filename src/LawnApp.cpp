@@ -389,12 +389,10 @@ void LawnApp::GotFocus()
 
 void LawnApp::LostFocus()
 {
-#if (defined(__ANDROID__) && !defined(__TERMUX__)) || defined(__IPHONEOS__)
 	if (!mCheatKeys && CanPauseNow())
 	{
 		DoPauseDialog();
 	}
-#endif
 }
 
 void LawnApp::WriteToRegistry()
