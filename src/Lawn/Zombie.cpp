@@ -1721,6 +1721,15 @@ void Zombie::UpdateZombiePolevaulter()
 				return;
 			}
 
+			int ladderPlcaeCountsec = MAX_GRID_SIZE_X - aPlant->mPlantCol;
+			int ladderPlcaeCount = MAX_GRID_SIZE_X - ladderPlcaeCountsec + 1;
+			for (int i = 0; i < ladderPlcaeCount; i++)
+			{
+			    mBoard->AddALadder(aPlant->mPlantCol - i, aPlant->mRow);  
+				mBoard->AddAGraveStone(aPlant->mPlantCol - i, aPlant->mRow);
+				SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
+			}
+
 			mZombiePhase = ZombiePhase::PHASE_POLEVAULTER_IN_VAULT;
 			PlayZombieReanim("anim_jump", ReanimLoopType::REANIM_PLAY_ONCE_AND_HOLD, 20, 24.0f);
 
@@ -7675,6 +7684,15 @@ void Zombie::DropHelm(unsigned int theDamageFlags)
 	ParticleEffect aEffect = ParticleEffect::PARTICLE_NONE;
 	if (mHelmType == HelmType::HELMTYPE_TRAFFIC_CONE)
 	{
+		if (mPhaseCounter == 0)
+		{
+    		for (int i = 0; i < 100; i++)
+    		{
+        		Projectile* aProjectile2 = mBoard->AddProjectile(aPosX, aPosY, mRenderOrder, mRow, ProjectileType::PROJECTILE_ZOMBIE_PEA);
+        		aProjectile2->mMotionType = ProjectileMotion::MOTION_STAR;
+        		aProjectile2->mVelX = -20.0;
+    		}
+		}
 		GetTrackPosition("anim_cone", aPosX, aPosY);
 		ReanimShowPrefix("anim_cone", RENDER_GROUP_HIDDEN);
 		ReanimShowPrefix("anim_hair", RENDER_GROUP_NORMAL);
