@@ -48,7 +48,8 @@ constinit const ProjectileDefinition gProjectileDefinition[] = {
 	{ .mProjectileType = ProjectileType::PROJECTILE_KERNEL, .mImageRow = 0, .mDamage = 20 },
 	{ .mProjectileType = ProjectileType::PROJECTILE_COBBIG, .mImageRow = 0, .mDamage = 300 },
 	{ .mProjectileType = ProjectileType::PROJECTILE_BUTTER, .mImageRow = 0, .mDamage = 40 },
-	{ .mProjectileType = ProjectileType::PROJECTILE_ZOMBIE_PEA, .mImageRow = 0, .mDamage = 20 }
+	{ .mProjectileType = ProjectileType::PROJECTILE_ZOMBIE_PEA, .mImageRow = 0, .mDamage = 20 },
+    { .mProjectileType = ProjectileType::PROJECTILE_ZOMBIE_MELON, .mImageRow = 0, .mDamage = 120 }
 };
 
 Projectile::Projectile()
@@ -179,7 +180,7 @@ Plant* Projectile::FindCollisionTargetPlant()
 		Rect aPlantRect = aPlant->GetPlantRect();
 		if (GetRectOverlap(aProjectileRect, aPlantRect) > 8)
 		{
-			if (mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA)
+			if (mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA || mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_MELON)
 			{
 				return mBoard->GetTopPlantAt(aPlant->mPlantCol, aPlant->mRow, PlantPriority::TOPPLANT_EATING_ORDER);
 			}
@@ -306,7 +307,7 @@ void Projectile::CheckForCollision()
 		return;
 	}
 
-	if (mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA)
+	if (mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA || mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_MELON)
 	{
 		Plant* aPlant = FindCollisionTargetPlant();
 		if (aPlant)
@@ -574,7 +575,7 @@ void Projectile::UpdateLobMotion()
 
 	Plant* aPlant = nullptr;
 	Zombie* aZombie = nullptr;
-	if (mProjectileType == ProjectileType::PROJECTILE_BASKETBALL || mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA)
+	if (mProjectileType == ProjectileType::PROJECTILE_BASKETBALL || mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA || mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_MELON)
 	{
 		aPlant = FindCollisionTargetPlant();
 	}
@@ -953,6 +954,7 @@ void Projectile::Update()
 		mProjectileType == ProjectileType::PROJECTILE_BUTTER ||
 		mProjectileType == ProjectileType::PROJECTILE_COBBIG ||
 		mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_PEA ||
+		mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_MELON ||
 		mProjectileType == ProjectileType::PROJECTILE_SPIKE)
 	{
 		aTime = 0;
@@ -1020,6 +1022,7 @@ void Projectile::Draw(Graphics* g)
 		aImage = IMAGE_REANIM_CORNPULT_BUTTER;
 		aScale = 0.8f;
 		break;
+	case ProjectileType::PROJECTILE_ZOMBIE_MELON:
 	case ProjectileType::PROJECTILE_MELON:
 		aImage = IMAGE_REANIM_MELONPULT_MELON;
 		aScale = 1.0f;
@@ -1118,6 +1121,7 @@ void Projectile::DrawShadow(Graphics* g)
 	case ProjectileType::PROJECTILE_KERNEL:
 	case ProjectileType::PROJECTILE_BUTTER:
 	case ProjectileType::PROJECTILE_MELON:
+	case ProjectileType::PROJECTILE_ZOMBIE_MELON:
 	case ProjectileType::PROJECTILE_WINTERMELON:
 		aOffsetX += 3.0f;
 		aOffsetY += 10.0f;
@@ -1176,7 +1180,7 @@ Rect Projectile::GetProjectileRect()
 	{
 		return Rect(mX + mWidth / 2 - 115, mY + mHeight / 2 - 115, 230, 230);
 	}
-	else if (mProjectileType == ProjectileType::PROJECTILE_MELON || mProjectileType == ProjectileType::PROJECTILE_WINTERMELON)
+	else if (mProjectileType == ProjectileType::PROJECTILE_MELON || mProjectileType == ProjectileType::PROJECTILE_WINTERMELON || mProjectileType == ProjectileType::PROJECTILE_ZOMBIE_MELON)
 	{
 		return Rect(mX + 20, mY, 60, mHeight);
 	}
