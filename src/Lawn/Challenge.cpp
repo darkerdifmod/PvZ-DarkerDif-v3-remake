@@ -65,7 +65,7 @@ constexpr const int MAX_SCARY_POTS = 54;
 constexpr const int STORM_FLASH_TIME = 150;
 
 int gZombieWaves[NUM_LEVELS] = {
-	4,  6,  8,  10, 8,  10, 20, 10, 20, 20,
+	4,  4,  6,  8, 8,  10, 20, 10, 20, 20,
 	10, 20, 10, 20, 10, 10, 20, 10, 20, 20,
 	10, 20, 20, 30, 20, 20, 30, 20, 30, 30,
 	10, 20, 10, 20, 20, 10, 20, 10, 20, 20,
