@@ -7688,7 +7688,7 @@ void Zombie::DropHelm(unsigned int theDamageFlags)
 		{
     		for (int i = 0; i < 50; i++)
     		{
-        		Projectile* aProjectile2 = mBoard->AddProjectile(aPosX, aPosY, mRenderOrder, mRow, ProjectileType::PROJECTILE_ZOMBIE_PEA);
+        		Projectile* aProjectile2 = mBoard->AddProjectile(aPosX, aPosY, mRenderOrder, mRow, ProjectileType::PROJECTILE_ZOMBIE_MELON);
         		aProjectile2->mMotionType = ProjectileMotion::MOTION_STAR;
         		aProjectile2->mVelX = -1.0;
     		}
