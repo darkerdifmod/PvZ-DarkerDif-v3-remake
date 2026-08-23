@@ -813,7 +813,8 @@ enum ProjectileType : int32_t
 	PROJECTILE_COBBIG = 11,
 	PROJECTILE_BUTTER = 12,
 	PROJECTILE_ZOMBIE_PEA = 13,
-	NUM_PROJECTILES = 14
+    PROJECTILE_ZOMBIE_MELON = 14,
+	NUM_PROJECTILES = 15
 };
 enum ReanimationType : uint32_t {
 	REANIM_NONE = static_cast<uint32_t>(-1),
