@@ -8432,6 +8432,10 @@ void Board::KeyChar(char theChar)
 
 void Board::AddSunMoney(int theAmount)
 {
+	if (mBackground == BACKGROUND_2_NIGHT)
+	{
+		theAmount *= 2;
+	}
 	mSunMoney += theAmount;
 	mSunMoney = std::min(mSunMoney, 9990);
 	if (mSunMoney >= 8000)
