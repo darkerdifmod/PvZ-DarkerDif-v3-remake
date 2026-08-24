@@ -4528,9 +4528,10 @@ void Plant::Fire(Zombie* theTargetZombie, int theRow, PlantWeapon thePlantWeapon
 		if (RandRangeInt(0, 100) <= 10)
 		{
 	        DoRowAreaDamage(100, 2u);
-	        StarFruitFire();
-			StarFruitFire();
-			StarFruitFire();
+			for (int i = 0; i < 4; i++)
+			{
+				StarFruitFire();
+			}
 	        return;
 		}
 	}
