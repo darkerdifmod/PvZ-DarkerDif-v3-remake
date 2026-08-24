@@ -1725,21 +1725,12 @@ void Zombie::UpdateZombiePolevaulter()
 				return;
 			}
 
-			int ladderPlcaeCountsec = MAX_GRID_SIZE_X - aPlant->mPlantCol;
-			int ladderPlcaeCount = MAX_GRID_SIZE_X - ladderPlcaeCountsec + 1;
-			for (int i = 0; i < ladderPlcaeCount; i++)
-			{
-				SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
-			    mBoard->AddALadder(aPlant->mPlantCol - i, aPlant->mRow);  
-				mBoard->AddAGraveStone(aPlant->mPlantCol - i, aPlant->mRow);
-			}
-
 			mZombiePhase = ZombiePhase::PHASE_POLEVAULTER_IN_VAULT;
 			PlayZombieReanim("anim_jump", ReanimLoopType::REANIM_PLAY_ONCE_AND_HOLD, 20, 24.0f);
 
 			Reanimation* aBodyReanim = mApp->ReanimationGet(mBodyReanimID);
 			float aAnimDuration = aBodyReanim->mFrameCount / aBodyReanim->mAnimRate * 100.0f;
-			int aJumpDistance = mX - aPlant->mX - 80;
+			int aJumpDistance = mX - aPlant->mX;
 			if (mApp->IsWallnutBowlingLevel())
 			{
 				aJumpDistance = 0;
@@ -1756,6 +1747,14 @@ void Zombie::UpdateZombiePolevaulter()
 	}
 	else if (mZombiePhase == ZombiePhase::PHASE_POLEVAULTER_IN_VAULT)
 	{
+		int ladderPlcaeCountsec = MAX_GRID_SIZE_X - aPlant->mPlantCol;
+		int ladderPlcaeCount = MAX_GRID_SIZE_X - ladderPlcaeCountsec + 1;
+		for (int i = 0; i < ladderPlcaeCount; i++)
+		{
+			SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
+		    mBoard->AddALadder(aPlant->mPlantCol - i, aPlant->mRow);  
+			mBoard->AddAGraveStone(aPlant->mPlantCol - i, aPlant->mRow);
+		}
 		Reanimation* aBodyReanim = mApp->ReanimationGet(mBodyReanimID);
 
 		bool aJumpEnds = false;
