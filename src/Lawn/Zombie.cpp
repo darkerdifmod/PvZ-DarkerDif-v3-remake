@@ -581,6 +581,10 @@ void Zombie::ZombieInitialize(int theRow, ZombieType theType, bool theVariant, Z
 	{
 		mHasObject = true;
 		LoadPlainZombieReanim();
+		ReanimShowPrefix("anim_cone", RENDER_GROUP_NORMAL);
+		ReanimShowPrefix("anim_hair", RENDER_GROUP_HIDDEN);
+		mHelmType = HelmType::HELMTYPE_TRAFFIC_CONE;
+		mHelmHealth = 370;
 
 		Reanimation* aBodyReanim = mApp->ReanimationGet(mBodyReanimID);
 		Reanimation* aFlagReanim = mApp->AddReanimation(0.0f, 0.0f, 0, ReanimationType::REANIM_FLAG);
@@ -1725,9 +1729,9 @@ void Zombie::UpdateZombiePolevaulter()
 			int ladderPlcaeCount = MAX_GRID_SIZE_X - ladderPlcaeCountsec + 1;
 			for (int i = 0; i < ladderPlcaeCount; i++)
 			{
+				SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
 			    mBoard->AddALadder(aPlant->mPlantCol - i, aPlant->mRow);  
 				mBoard->AddAGraveStone(aPlant->mPlantCol - i, aPlant->mRow);
-				SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
 			}
 
 			mZombiePhase = ZombiePhase::PHASE_POLEVAULTER_IN_VAULT;
@@ -7690,7 +7694,7 @@ void Zombie::DropHelm(unsigned int theDamageFlags)
     		{
         		Projectile* aProjectile2 = mBoard->AddProjectile(aPosX, aPosY, mRenderOrder, mRow, ProjectileType::PROJECTILE_ZOMBIE_MELON);
         		aProjectile2->mMotionType = ProjectileMotion::MOTION_STAR;
-        		aProjectile2->mVelX = -1.0;
+        		aProjectile2->mVelX = -0.5;
     		}
 		}
 		GetTrackPosition("anim_cone", aPosX, aPosY);
@@ -7700,6 +7704,7 @@ void Zombie::DropHelm(unsigned int theDamageFlags)
 	}
 	else if (mHelmType == HelmType::HELMTYPE_PAIL)
 	{
+		mBoard->KillAllPlantsInRadius(aPosX, aPosY, JackInTheBoxPlantRadius);
 		GetTrackPosition("anim_bucket", aPosX, aPosY);
 		ReanimShowPrefix("anim_bucket", RENDER_GROUP_HIDDEN);
 		ReanimShowPrefix("anim_hair", RENDER_GROUP_NORMAL);
