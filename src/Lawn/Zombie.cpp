@@ -7704,7 +7704,7 @@ void Zombie::DropHelm(unsigned int theDamageFlags)
 	}
 	else if (mHelmType == HelmType::HELMTYPE_PAIL)
 	{
-		mBoard->KillAllPlantsInRadius(aPosX, aPosY, JackInTheBoxPlantRadius);
+		mBoard->KillAllPlantsInRadius(aPosX, aPosY, 115);
 		GetTrackPosition("anim_bucket", aPosX, aPosY);
 		ReanimShowPrefix("anim_bucket", RENDER_GROUP_HIDDEN);
 		ReanimShowPrefix("anim_hair", RENDER_GROUP_NORMAL);
