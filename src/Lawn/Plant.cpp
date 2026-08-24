@@ -4394,6 +4394,7 @@ void Plant::DoSpecial()
 		aPosY = mY + mHeight / 2;
 
 		mApp->PlaySample(SOUND_POTATO_MINE);
+		mBoard->DoFwoosh(mRow);
 		if (mBoard->KillAllZombiesInRadius(mRow, aPosX, aPosY, 60, 0, false, aDamageRangeFlags) >= 1)
 			ReportAchievement::GiveAchievement(mApp, Spudow, true);
 
@@ -4784,6 +4785,25 @@ void Plant::Fire(Zombie* theTargetZombie, int theRow, PlantWeapon thePlantWeapon
 		aProjectile->mVelZ = -8.0f;
 		aProjectile->mCobTargetX = mTargetX - 40;
 		aProjectile->mCobTargetRow = mBoard->PixelToGridYKeepOnBoard(mTargetX, mTargetY);
+	}
+	else if (mSeedType == SeedType::SEED_SNOWPEA)
+	{
+	    float aShootAngleX = cos(DEG_TO_RAD(30.0f)) * 3.33f;
+	    float aShootAngleY = sin(DEG_TO_RAD(30.0f)) * 3.33f;
+	    for (int i = 0; i < 3; i++)
+	    {
+	        Projectile* aProjectile2 = mBoard->AddProjectile(aOriginX, aOriginY, mRenderOrder - 1, mRow, ProjectileType::PROJECTILE_SNOWPEA);
+	        aProjectile2->mDamageRangeFlags = GetDamageRangeFlags(PlantWeapon::WEAPON_PRIMARY);
+	        aProjectile2->mMotionType = ProjectileMotion::MOTION_STAR;
+	
+	        switch (i)
+	        {
+	        case 0:     aProjectile2->mVelX = aShootAngleX;  aProjectile2->mVelY = aShootAngleY;      break;
+	        case 1:     aProjectile2->mVelX = aShootAngleX;  aProjectile2->mVelY = -aShootAngleY;     break;
+			case 2:     aProjectile2->mVelX = aShootAngleX;  break;
+	        default:    TOD_ASSERT(false);                                                            break;
+	        }
+	    }
 	}
 }
 
