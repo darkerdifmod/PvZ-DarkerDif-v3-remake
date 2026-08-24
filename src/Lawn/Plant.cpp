@@ -4801,7 +4801,7 @@ void Plant::Fire(Zombie* theTargetZombie, int theRow, PlantWeapon thePlantWeapon
 	        case 0:     aProjectile2->mVelX = aShootAngleX;  aProjectile2->mVelY = aShootAngleY;      break;
 	        case 1:     aProjectile2->mVelX = aShootAngleX;  aProjectile2->mVelY = -aShootAngleY;     break;
 			case 2:     aProjectile2->mVelX = aShootAngleX;  break;
-	        default:    C_ASSERT(false);                                                            break;
+	        default:    PVZP_ASSERT(false);                                                            break;
 	        }
 	    }
 	}
