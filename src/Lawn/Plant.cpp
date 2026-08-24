@@ -1819,6 +1819,9 @@ void Plant::UpdateChomper()
 
 			mState = PlantState::STATE_CHOMPER_DIGESTING;
 			mStateCountdown = 4000;
+			float aShootAngleX;
+			float aShootAngleY;
+			
 			if (mApp->IsIZombieLevel())
 			{
 			    aShootAngleX = cos(DEG_TO_RAD(-30.0f)) * 2.33f;
