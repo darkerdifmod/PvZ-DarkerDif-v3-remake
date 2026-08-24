@@ -4523,6 +4523,15 @@ void Plant::CobCannonFire(int theTargetX, int theTargetY)
 
 void Plant::Fire(Zombie* theTargetZombie, int theRow, PlantWeapon thePlantWeapon)
 {
+	if (mSeedType == SeedType::SEED_PEASHOOTER)
+	{
+		if (RandRangeInt(0, 120) <= 10)
+		{
+	        DoRowAreaDamage(20, 2u);
+	        StarFruitFire();
+	        return;
+		}
+	}
 	if (mSeedType == SeedType::SEED_FUMESHROOM)
 	{
 		DoRowAreaDamage(20, 2U);
