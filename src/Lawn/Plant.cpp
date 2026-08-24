@@ -1819,6 +1819,30 @@ void Plant::UpdateChomper()
 
 			mState = PlantState::STATE_CHOMPER_DIGESTING;
 			mStateCountdown = 4000;
+			if (mApp->IsIZombieLevel())
+			{
+			    aShootAngleX = cos(DEG_TO_RAD(-30.0f)) * 2.33f;
+			    aShootAngleY = sin(DEG_TO_RAD(-30.0f)) * 2.33f;
+			}
+			else {
+			    aShootAngleX = cos(DEG_TO_RAD(30.0f)) * 2.33f;
+			    aShootAngleY = sin(DEG_TO_RAD(30.0f)) * 2.33f;
+			}
+			
+			for (int i = 0; i < 2; i++)
+			{
+			    Projectile* aProjectile2 = mBoard->AddProjectile(mX, mY, mRenderOrder - 1, mRow, ProjectileType::PROJECTILE_BUTTER);
+			    aProjectile2->mDamageRangeFlags = GetDamageRangeFlags(PlantWeapon::WEAPON_PRIMARY);
+			    aProjectile2->mMotionType = ProjectileMotion::MOTION_STAR;
+			
+			    switch (i)
+			    {
+			    case 0:     aProjectile2->mVelX = aShootAngleX;  aProjectile2->mVelY = aShootAngleY;      break;
+			    case 1:     aProjectile2->mVelX = aShootAngleX;  aProjectile2->mVelY = -aShootAngleY;     break;
+			    default:    PVZP_ASSERT(false);                                                            break;
+			    }
+			}
+			Die();
 		}
 	}
 	else if (mState == PlantState::STATE_CHOMPER_DIGESTING)
