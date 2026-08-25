@@ -1737,6 +1737,14 @@ void Zombie::UpdateZombiePolevaulter()
 			}
 			mVelX = aJumpDistance / aAnimDuration;
 			mHasObject = false;
+			int ladderPlcaeCountsec = MAX_GRID_SIZE_X - aPlant->mPlantCol;
+			int ladderPlcaeCount = MAX_GRID_SIZE_X - ladderPlcaeCountsec + 1;
+			for (int i = 0; i < ladderPlcaeCount; i++)
+			{
+				SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
+			    mBoard->AddALadder(aPlant->mPlantCol - i, aPlant->mRow);  
+				mBoard->AddAGraveStone(aPlant->mPlantCol - i, aPlant->mRow);
+			}
 		}
 
 		if (mApp->IsIZombieLevel() && mBoard->mChallenge->IZombieGetBrainTarget(this))
@@ -1747,14 +1755,6 @@ void Zombie::UpdateZombiePolevaulter()
 	}
 	else if (mZombiePhase == ZombiePhase::PHASE_POLEVAULTER_IN_VAULT)
 	{
-		int ladderPlcaeCountsec = MAX_GRID_SIZE_X - aPlant->mPlantCol;
-		int ladderPlcaeCount = MAX_GRID_SIZE_X - ladderPlcaeCountsec + 1;
-		for (int i = 0; i < ladderPlcaeCount; i++)
-		{
-			SquishAllInSquare(aPlant->mPlantCol - i, aPlant->mRow, ZombieAttackType::ATTACKTYPE_CHEW);
-		    mBoard->AddALadder(aPlant->mPlantCol - i, aPlant->mRow);  
-			mBoard->AddAGraveStone(aPlant->mPlantCol - i, aPlant->mRow);
-		}
 		Reanimation* aBodyReanim = mApp->ReanimationGet(mBodyReanimID);
 
 		bool aJumpEnds = false;
