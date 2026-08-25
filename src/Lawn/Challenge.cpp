@@ -2986,14 +2986,18 @@ void Challenge::SpawnZombieWave()
 	}
 
 	int aIsFlagWave = mBoard->IsFlagWave(mBoard->mCurrentWave);
-	if (mApp->mGameMode == GAMEMODE_CHALLENGE_GRAVE_DANGER && mBoard->mCurrentWave != mBoard->mNumWaves - 1)
+	if (true)
 	{
 		if (aIsFlagWave)
 		{
 			mBoard->SpawnZombiesFromGraves();
+			mBoard->SpawnZombiesFromGraves();
 		}
 		else if (mBoard->mCurrentWave > 5)
 		{
+			GraveDangerSpawnRandomGrave();
+		    GraveDangerSpawnRandomGrave();
+		    GraveDangerSpawnRandomGrave();
 			GraveDangerSpawnRandomGrave();
 		}
 	}
