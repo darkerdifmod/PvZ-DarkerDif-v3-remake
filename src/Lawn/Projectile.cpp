@@ -48,7 +48,7 @@ constinit const ProjectileDefinition gProjectileDefinition[] = {
 	{ .mProjectileType = ProjectileType::PROJECTILE_KERNEL, .mImageRow = 0, .mDamage = 20 },
 	{ .mProjectileType = ProjectileType::PROJECTILE_COBBIG, .mImageRow = 0, .mDamage = 300 },
 	{ .mProjectileType = ProjectileType::PROJECTILE_BUTTER, .mImageRow = 0, .mDamage = 40 },
-	{ .mProjectileType = ProjectileType::PROJECTILE_ZOMBIE_PEA, .mImageRow = 0, .mDamage = 20 },
+	{ .mProjectileType = ProjectileType::PROJECTILE_ZOMBIE_PEA, .mImageRow = 0, .mDamage = 1 },
     { .mProjectileType = ProjectileType::PROJECTILE_ZOMBIE_MELON, .mImageRow = 0, .mDamage = 120 }
 };
 
