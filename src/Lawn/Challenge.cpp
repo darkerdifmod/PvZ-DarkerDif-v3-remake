@@ -3001,7 +3001,7 @@ void Challenge::SpawnZombieWave()
 			GraveDangerSpawnRandomGrave();
 		}
 	}
-	if (mApp->IsSurvivalMode() && mBoard->mBackground == BACKGROUND_2_NIGHT && mBoard->mCurrentWave == mBoard->mNumWaves - 1)
+	if (true)
 	{
 		int aNumGraves = mBoard->GetGraveStonesCount();
 		int aGraveLimit = mApp->IsSurvivalNormal(mApp->mGameMode) ? 8 : 12;
