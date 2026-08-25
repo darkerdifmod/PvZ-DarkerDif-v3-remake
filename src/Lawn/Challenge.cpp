@@ -2997,8 +2997,6 @@ void Challenge::SpawnZombieWave()
 		{
 			GraveDangerSpawnRandomGrave();
 		    GraveDangerSpawnRandomGrave();
-		    GraveDangerSpawnRandomGrave();
-			GraveDangerSpawnRandomGrave();
 		}
 	}
 	if (true)
