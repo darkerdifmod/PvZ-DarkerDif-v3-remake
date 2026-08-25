@@ -8647,7 +8647,7 @@ bool Board::StageHasGraveStones()
 		mApp->IsScaryPotterLevel())
 		return false;
 
-	return mBackground == BackgroundType::BACKGROUND_2_NIGHT;
+	return true;
 }
 
 bool Board::StageHasRoof()
