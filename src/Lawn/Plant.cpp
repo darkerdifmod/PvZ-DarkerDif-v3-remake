@@ -4428,8 +4428,12 @@ void Plant::DoSpecial()
 		int aRenderPosition = Board::MakeRenderOrder(RenderLayer::RENDER_LAYER_PARTICLE, mRow, 0);
 		mApp->AddPvzpParticle(aPosX + 20.0f, aPosY, aRenderPosition, ParticleEffect::PARTICLE_POTATO_MINE);
 		mBoard->ShakeBoard(3, -4);
+		BurnRow(mRow);
 
-		Die();
+		if (RandRangeInt(0, 100) < 50)
+		{
+            Die();
+		}
 		break;
 	}
 	case SeedType::SEED_INSTANT_COFFEE:
@@ -4535,6 +4539,11 @@ void Plant::Fire(Zombie* theTargetZombie, int theRow, PlantWeapon thePlantWeapon
 	        return;
 		}
 	}
+	if (mSeedType == SeedType::SEED_REPEATER)
+	{
+		DoRowAreaDamage(20, 2U);
+		StarFruitFire();
+	}
 	if (mSeedType == SeedType::SEED_FUMESHROOM)
 	{
 		DoRowAreaDamage(20, 2U);
@@ -4556,7 +4565,11 @@ void Plant::Fire(Zombie* theTargetZombie, int theRow, PlantWeapon thePlantWeapon
 	switch (mSeedType)
 	{
 	case SeedType::SEED_PEASHOOTER:
+		aProjectileType = ProjectileType::PROJECTILE_PEA;
+		break;
 	case SeedType::SEED_REPEATER:
+		aProjectileType = ProjectileType::PROJECTILE_ZOMBIE_PEA;
+		break;
 	case SeedType::SEED_THREEPEATER:
 	case SeedType::SEED_SPLITPEA:
 	case SeedType::SEED_GATLINGPEA:
